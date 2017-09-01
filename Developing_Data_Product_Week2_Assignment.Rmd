@@ -1,0 +1,29 @@
+
+# **September 1, 2017**
+# **------------------------------**
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r data, echo=FALSE}
+df=read.csv("C:/Users/dahj/Videos/Courses & Classes/Coursera Developing Data Products/Week 2/southafricageogplaces.csv")
+```
+```{r mapping, echo=FALSE}
+library(leaflet)
+
+iconUrl= makeIcon("C:/Users/dahj/Videos/Courses & Classes/Coursera Developing Data Products/Week 2/antenna.png",
+iconWidth=31*215/230, iconHeight=31, iconAnchorX=31*215/230/2, iconAnchorY=16)
+
+mycoordinates= data.frame(
+  lat=c(df$lattitude),
+  lng=c(df$longitude))
+
+tooltip=as.character(df$market_place)
+
+mycoordinates %>%
+  leaflet() %>%
+  addTiles() %>%
+  addMarkers(clusterOptions=markerClusterOptions(), icon=iconUrl, popup=tooltip)
+```
